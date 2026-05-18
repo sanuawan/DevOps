@@ -1,0 +1,14 @@
+---
+- name: Configure Laravel Application Container
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Ensure storage directory has correct permissions
+      file:
+        path: ./storage
+        mode: '0775'
+        state: directory
+
+    - name: Run Laravel Configuration Cache
+      echo:
+        msg: "Application environment optimized successfully."

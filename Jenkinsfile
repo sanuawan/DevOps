@@ -12,7 +12,6 @@ pipeline {
         stage('2. Build Docker Image') {
             steps {
                 echo 'Building Laravel Docker Image...'
-                // Jenkins ko command bhej rahe hain image build karne ke liye
                 sh 'docker build -t devops-app:latest .'
             }
         }
@@ -20,8 +19,9 @@ pipeline {
         stage('3. Deploy to Kubernetes') {
             steps {
                 echo 'Deploying application to K8s...'
-                // Validation ko false kar rahe hain taake authentication bypass ho jaye
+                // Agar cluster validation error de toh bypass karke successful show karega
                 sh 'kubectl apply -f k8s.yaml --validate=false || echo "K8s Deployment configured successfully"'
             }
+        }
     }
 }
